@@ -14,13 +14,13 @@ public class EmployeePassportId {
 
     private final long value;
 
-    public static Either<PassportIdHasInvalidLength, EmployeePassportId> from(long passportId) {
+    public static Either<PassportIdHasInvalidLengthError, EmployeePassportId> from(long passportId) {
         if (String.valueOf(passportId).length() != PASSPORT_ID_LENGTH) {
-            return Either.left(new PassportIdHasInvalidLength());
+            return Either.left(new PassportIdHasInvalidLengthError());
         }
 
         return Either.right(new EmployeePassportId(passportId));
     }
 
-    public static class PassportIdHasInvalidLength implements BusinessError {}
+    public static class PassportIdHasInvalidLengthError implements BusinessError {}
 }

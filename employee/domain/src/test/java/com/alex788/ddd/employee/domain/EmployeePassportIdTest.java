@@ -1,6 +1,5 @@
 package com.alex788.ddd.employee.domain;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -23,6 +22,6 @@ class EmployeePassportIdTest {
         var passportIdEth = EmployeePassportId.from(value);
 
         assertTrue(passportIdEth.isLeft());
-        assertInstanceOf(EmployeePassportId.PassportIdHasInvalidLength.class, passportIdEth.getLeft());
+        assertInstanceOf(EmployeePassportId.PassportIdHasInvalidLengthError.class, passportIdEth.getLeft());
     }
 }
