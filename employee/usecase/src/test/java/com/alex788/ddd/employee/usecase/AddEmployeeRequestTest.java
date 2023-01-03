@@ -1,10 +1,5 @@
-package com.alex788.employee.usecase;
+package com.alex788.ddd.employee.usecase;
 
-import com.alex788.ddd.employee.domain.EmployeeDepartment;
-import com.alex788.ddd.employee.domain.EmployeeName;
-import com.alex788.ddd.employee.domain.EmployeePassportId;
-import com.alex788.ddd.employee.domain.EmployeePosition;
-import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

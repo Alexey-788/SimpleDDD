@@ -1,4 +1,4 @@
-package com.alex788.employee.usecase;
+package com.alex788.ddd.employee.usecase;
 
 import com.alex788.ddd.common.types.error.BusinessError;
 import com.alex788.ddd.employee.domain.*;

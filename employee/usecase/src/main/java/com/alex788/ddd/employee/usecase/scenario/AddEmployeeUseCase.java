@@ -1,10 +1,10 @@
-package com.alex788.employee.usecase.scenario;
+package com.alex788.ddd.employee.usecase.scenario;
 
 import com.alex788.ddd.employee.domain.Employee;
 import com.alex788.ddd.employee.domain.EmployeeAlreadyExists;
 import com.alex788.ddd.employee.domain.EmployeeId;
-import com.alex788.employee.usecase.AddEmployee;
-import com.alex788.employee.usecase.access.EmployeePersister;
+import com.alex788.ddd.employee.usecase.AddEmployee;
+import com.alex788.ddd.employee.usecase.access.EmployeePersister;
 import io.vavr.control.Either;
 import lombok.RequiredArgsConstructor;
 

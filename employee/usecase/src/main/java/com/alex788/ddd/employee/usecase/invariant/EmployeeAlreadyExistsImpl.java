@@ -1,9 +1,9 @@
-package com.alex788.employee.usecase.invariant;
+package com.alex788.ddd.employee.usecase.invariant;
 
 import com.alex788.ddd.employee.domain.Employee;
 import com.alex788.ddd.employee.domain.EmployeeAlreadyExists;
 import com.alex788.ddd.employee.domain.EmployeePassportId;
-import com.alex788.employee.usecase.access.EmployeeExtractor;
+import com.alex788.ddd.employee.usecase.access.EmployeeExtractor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;

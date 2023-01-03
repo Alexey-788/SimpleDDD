@@ -1,4 +1,4 @@
-package com.alex788.employee.usecase.access;
+package com.alex788.ddd.employee.usecase.access;
 
 import com.alex788.ddd.employee.domain.Employee;
 import com.alex788.ddd.employee.domain.EmployeePassportId;
