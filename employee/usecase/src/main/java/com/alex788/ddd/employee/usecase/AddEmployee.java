@@ -56,6 +56,7 @@ public interface AddEmployee {
         }
     }
 
+    @Getter
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     class InvalidEmployeeParameter {
 
