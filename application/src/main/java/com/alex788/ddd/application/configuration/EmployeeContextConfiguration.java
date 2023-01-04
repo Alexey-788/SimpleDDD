@@ -5,11 +5,14 @@ import com.alex788.ddd.employee.domain.EmployeeId;
 import com.alex788.ddd.employee.persistence.InMemoryEmployeeIdGenerator;
 import com.alex788.ddd.employee.persistence.InMemoryEmployeeRepository;
 import com.alex788.ddd.employee.presentation.AddEmployeeController;
+import com.alex788.ddd.employee.presentation.GetAllEmployeesController;
 import com.alex788.ddd.employee.usecase.AddEmployee;
+import com.alex788.ddd.employee.usecase.GetAllEmployees;
 import com.alex788.ddd.employee.usecase.access.EmployeeExtractor;
 import com.alex788.ddd.employee.usecase.access.EmployeePersister;
 import com.alex788.ddd.employee.usecase.invariant.EmployeeAlreadyExistsImpl;
 import com.alex788.ddd.employee.usecase.scenario.AddEmployeeUseCase;
+import com.alex788.ddd.employee.usecase.scenario.GetAllEmployeesUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -30,6 +33,11 @@ public class EmployeeContextConfiguration {
     }
 
     @Bean
+    GetAllEmployees getAllEmployees(EmployeeExtractor employeeExtractor) {
+        return new GetAllEmployeesUseCase(employeeExtractor);
+    }
+
+    @Bean
     EmployeeId.EmployeeIdGenerator employeeIdGenerator() {
         return new InMemoryEmployeeIdGenerator();
     }
@@ -45,9 +53,12 @@ public class EmployeeContextConfiguration {
     }
 
     @Bean
-    AddEmployeeController employeeController(
-            AddEmployee addEmployee
-    ) {
+    AddEmployeeController addEmployeeController(AddEmployee addEmployee) {
         return new AddEmployeeController(addEmployee);
+    }
+
+    @Bean
+    GetAllEmployeesController getAllEmployeesController(GetAllEmployees getAllEmployees) {
+        return new GetAllEmployeesController(getAllEmployees);
     }
 }

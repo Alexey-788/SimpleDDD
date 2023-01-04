@@ -6,9 +6,12 @@ import com.alex788.ddd.employee.domain.EmployeePassportId;
 import com.alex788.ddd.employee.usecase.access.EmployeeExtractor;
 import com.alex788.ddd.employee.usecase.access.EmployeePersister;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class InMemoryEmployeeRepository implements EmployeePersister, EmployeeExtractor {
 
@@ -19,6 +22,11 @@ public class InMemoryEmployeeRepository implements EmployeePersister, EmployeeEx
         return storage.values().stream()
                 .filter(employee -> employee.getPassportId().equals(passportId))
                 .findFirst();
+    }
+
+    @Override
+    public List<Employee> getAll() {
+        return new ArrayList<>(storage.values());
     }
 
     @Override
