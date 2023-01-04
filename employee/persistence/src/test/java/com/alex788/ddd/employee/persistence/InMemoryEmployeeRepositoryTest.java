@@ -4,6 +4,7 @@ import com.alex788.ddd.employee.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,6 +63,37 @@ class InMemoryEmployeeRepositoryTest {
         Optional<Employee> storedEmployeeOpt = repository.getByPassportId(passportId);
 
         assertTrue(storedEmployeeOpt.isEmpty());
+    }
+
+    @Test
+    void getAll_EmployeeDoesntExist_ReturnsEmptyList() {
+        List<Employee> storedEmployees = repository.getAll();
+
+        assertEquals(0, storedEmployees.size());
+    }
+
+    @Test
+    void getAll_EmployeesExist_ReturnsSameEmployees() {
+        Employee employee1 = employeeWithId(new EmployeeId(1));
+        Employee employee2 = employeeWithId(new EmployeeId(2));
+        repository.storage.put(employee1.getId(), employee1);
+        repository.storage.put(employee2.getId(), employee2);
+
+        List<Employee> employees = repository.getAll();
+
+        assertEquals(2, employees.size());
+        assertSame(
+                employee1,
+                employees.stream().filter(
+                        employee -> employee.getId().getValue() == 1
+                ).findFirst().get()
+        );
+        assertSame(
+                employee2,
+                employees.stream().filter(
+                        employee -> employee.getId().getValue() == 2
+                ).findFirst().get()
+        );
     }
 
     Employee employeeWithId(EmployeeId id) {
