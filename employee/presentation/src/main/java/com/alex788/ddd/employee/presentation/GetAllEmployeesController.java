@@ -3,7 +3,6 @@ package com.alex788.ddd.employee.presentation;
 import com.alex788.ddd.employee.usecase.GetAllEmployees;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.assertj.core.internal.Urls;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

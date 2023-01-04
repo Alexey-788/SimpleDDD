@@ -48,7 +48,7 @@ public class EmployeeContextConfiguration {
     }
 
     @Bean
-    InMemoryEmployeeRepository employeeReposito() {
+    InMemoryEmployeeRepository employeeRepository() {
         return new InMemoryEmployeeRepository();
     }
 
