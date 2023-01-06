@@ -1,7 +1,6 @@
 package com.alex788.ddd.employee.usecase.scenario;
 
-import com.alex788.ddd.employee.domain.EmployeeAlreadyExists;
-import com.alex788.ddd.employee.domain.EmployeeId;
+import com.alex788.ddd.employee.domain.*;
 import com.alex788.ddd.employee.usecase.AddEmployee;
 import com.alex788.ddd.employee.usecase.access.EmployeePersister;
 import org.junit.jupiter.api.Test;
@@ -47,12 +46,12 @@ class AddEmployeeUseCaseTest {
     }
 
     AddEmployee.AddEmployeeRequest addEmployeeRequest() {
-        return AddEmployee.AddEmployeeRequest.from(
-                1234567890L,
-                "Some Name",
-                "Some Department",
-                "Some position"
-        ).get();
+        return new AddEmployee.AddEmployeeRequest(
+                EmployeePassportId.from(1234567890).get(),
+                EmployeeName.from("Some Name").get(),
+                EmployeeDepartment.from("Some Department").get(),
+                EmployeePosition.from("Some Positioon").get()
+        );
     }
 
     EmployeeId.EmployeeIdGenerator idGenerator() {

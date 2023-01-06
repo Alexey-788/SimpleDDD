@@ -97,7 +97,7 @@ class InMemoryEmployeeRepositoryTest {
     }
 
     Employee employeeWithId(EmployeeId id) {
-        return Employee.create(
+        return Employee.addToStuff(
                 () -> id,
                 (passportId) -> false,
                 EmployeePassportId.from(1234567890L).get(),
@@ -108,7 +108,7 @@ class InMemoryEmployeeRepositoryTest {
     }
 
     Employee employeeWithPassportId(EmployeePassportId passportId) {
-        return Employee.create(
+        return Employee.addToStuff(
                 () -> new EmployeeId(1),
                 (pId) -> false,
                 passportId,

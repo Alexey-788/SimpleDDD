@@ -1,6 +1,6 @@
 package com.alex788.ddd.employee.domain;
 
-import org.junit.jupiter.api.Test;
+import io.vavr.control.Either;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -11,7 +11,7 @@ class EmployeeNameTest {
     @ParameterizedTest
     @ValueSource(strings = {"Name", "FirstName SecondName"})
     void from_WithValidValue_CreatesSuccessfully(String value) {
-        var nameEth = EmployeeName.from(value);
+        Either<EmployeeName.Error, EmployeeName> nameEth = EmployeeName.from(value);
 
         assertTrue(nameEth.isRight());
         assertEquals(value, nameEth.get().getValue());
@@ -20,9 +20,9 @@ class EmployeeNameTest {
     @ParameterizedTest
     @ValueSource(strings = {"", "\n  \t "})
     void from_WithBlankValue_ReturnsError(String value) {
-        var nameEth = EmployeeName.from(value);
+        Either<EmployeeName.Error, EmployeeName> nameEth = EmployeeName.from(value);
 
         assertTrue(nameEth.isLeft());
-        assertInstanceOf(EmployeeName.EmptyEmployeeNameError.class, nameEth.getLeft());
+        assertEquals(EmployeeName.Error.BLANK_VALUE, nameEth.getLeft());
     }
 }

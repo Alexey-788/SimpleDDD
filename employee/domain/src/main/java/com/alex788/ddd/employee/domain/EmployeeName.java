@@ -14,13 +14,15 @@ public class EmployeeName {
 
     private final String value;
 
-    public static Either<EmptyEmployeeNameError, EmployeeName> from(String name) {
+    public static Either<Error, EmployeeName> from(String name) {
         if (name.isBlank()) {
-            return Either.left(new EmptyEmployeeNameError());
+            return Either.left(Error.BLANK_VALUE);
         }
 
         return Either.right(new EmployeeName(name));
     }
 
-    public static class EmptyEmployeeNameError implements BusinessError {}
+    public enum Error implements BusinessError {
+        BLANK_VALUE
+    }
 }

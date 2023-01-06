@@ -35,7 +35,7 @@ class GetAllEmployeesUseCaseTest {
     }
 
     Employee employeeFrom(long id, long passportId, String name, String department, String position) {
-        return Employee.create(
+        return Employee.addToStuff(
                 () -> new EmployeeId(id),
                 (pId) -> false,
                 EmployeePassportId.from(passportId).get(),

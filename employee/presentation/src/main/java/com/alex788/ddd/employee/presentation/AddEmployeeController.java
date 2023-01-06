@@ -1,5 +1,9 @@
 package com.alex788.ddd.employee.presentation;
 
+import com.alex788.ddd.employee.domain.EmployeeDepartment;
+import com.alex788.ddd.employee.domain.EmployeeName;
+import com.alex788.ddd.employee.domain.EmployeePassportId;
+import com.alex788.ddd.employee.domain.EmployeePosition;
 import com.alex788.ddd.employee.usecase.AddEmployee;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,14 +25,13 @@ public class AddEmployeeController {
             @Valid @RequestBody AddEmployeeJson addEmployeeJson
     ) {
         String[] response = {"done"};
-        AddEmployee.AddEmployeeRequest.from(
-                        addEmployeeJson.getPassportId(),
-                        addEmployeeJson.getName(),
-                        addEmployeeJson.getDepartment(),
-                        addEmployeeJson.getPosition()
-                )
-                .peek(addEmployee::execute)
-                .peekLeft(err -> response[0] = err.getMessage());
+
+        addEmployee.execute(new AddEmployee.AddEmployeeRequest(
+                EmployeePassportId.from(addEmployeeJson.getPassportId()).get(),
+                EmployeeName.from(addEmployeeJson.getName()).get(),
+                EmployeeDepartment.from(addEmployeeJson.getDepartment()).get(),
+                EmployeePosition.from(addEmployeeJson.getPosition()).get()
+        ));//TODO: validation
 
         return response[0];
     }

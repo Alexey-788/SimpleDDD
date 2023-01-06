@@ -16,7 +16,7 @@ public class Employee {
     private final EmployeeDepartment department;
     private final EmployeePosition position;
 
-    public static Either<EmployeeAlreadyExistsWithSamePassportIdError, Employee> create(
+    public static Either<AddToStuffError, Employee> addToStuff(
             EmployeeId.EmployeeIdGenerator idGenerator,
             EmployeeAlreadyExists alreadyExists,
             EmployeePassportId passportId,
@@ -25,7 +25,7 @@ public class Employee {
             EmployeePosition position
     ) {
         if (alreadyExists.check(passportId)) {
-            return Either.left(new EmployeeAlreadyExistsWithSamePassportIdError());
+            return Either.left(AddToStuffError.ALREADY_EXISTS_WITH_SAME_PASSPORT_ID);
         }
 
         EmployeeId id = idGenerator.generate();
@@ -39,5 +39,7 @@ public class Employee {
         ));
     }
 
-    public static class EmployeeAlreadyExistsWithSamePassportIdError implements BusinessError {}
+    public enum AddToStuffError implements BusinessError {
+        ALREADY_EXISTS_WITH_SAME_PASSPORT_ID
+    }
 }

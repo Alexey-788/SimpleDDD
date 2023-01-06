@@ -17,7 +17,7 @@ public class AddEmployeeUseCase implements AddEmployee {
 
     @Override
     public Either<AddEmployeeError, EmployeeId> execute(AddEmployeeRequest request) {
-        var employeeEth = Employee.create(
+        var employeeEth = Employee.addToStuff(
                 idGenerator,
                 alreadyExists,
                 request.getPassportId(),
@@ -27,7 +27,7 @@ public class AddEmployeeUseCase implements AddEmployee {
         );
 
         if (employeeEth.isLeft())
-            return Either.left(new EmployeeAlreadyExistsError());
+            return Either.left(AddEmployeeError.ALREADY_EXISTS_WITH_SAME_PASSPORT_ID);
 
         Employee employee = employeeEth.get();
         persister.save(employee);
