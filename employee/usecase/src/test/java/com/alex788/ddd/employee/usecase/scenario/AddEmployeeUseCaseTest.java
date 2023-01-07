@@ -5,7 +5,8 @@ import com.alex788.ddd.employee.usecase.AddEmployee;
 import com.alex788.ddd.employee.usecase.access.EmployeePersister;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.alex788.ddd.employee.domain.Fixtures.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class AddEmployeeUseCaseTest {
@@ -47,15 +48,15 @@ class AddEmployeeUseCaseTest {
 
     AddEmployee.AddEmployeeRequest addEmployeeRequest() {
         return new AddEmployee.AddEmployeeRequest(
-                EmployeePassportId.from(1234567890).get(),
-                EmployeeName.from("Some Name").get(),
-                EmployeeDepartment.from("Some Department").get(),
-                EmployeePosition.from("Some Positioon").get()
+                employeePassportId(),
+                employeeName(),
+                employeeDepartment(),
+                employeePosition()
         );
     }
 
     EmployeeId.EmployeeIdGenerator idGenerator() {
-        return () -> new EmployeeId(1234567890L);
+        return Fixtures::employeeId;
     }
 
     EmployeePersister persister() {

@@ -4,16 +4,17 @@ import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static com.alex788.ddd.employee.domain.Fixtures.*;
 
 class EmployeeTest {
 
     @Test
     void addToStuff_InInvariant_CreatesEmployeeSuccessfully() {
-        EmployeeId id = new EmployeeId(1);
-        EmployeePassportId passportId = passportId();
-        EmployeeName name = name();
-        EmployeeDepartment department = department();
-        EmployeePosition position = position();
+        EmployeeId id = employeeId();
+        EmployeePassportId passportId = employeePassportId();
+        EmployeeName name = employeeName();
+        EmployeeDepartment department = employeeDepartment();
+        EmployeePosition position = employeePosition();
 
         Either<Employee.AddToStuffError, Employee> employeeEth = Employee.addToStuff(
                 idGeneratorThatReturns(id),
@@ -38,10 +39,10 @@ class EmployeeTest {
         Employee.addToStuff(
                 () -> new EmployeeId(1),
                 employeeExists(),
-                passportId(),
-                name(),
-                department(),
-                position()
+                employeePassportId(),
+                employeeName(),
+                employeeDepartment(),
+                employeePosition()
         );
     }
 
@@ -54,21 +55,5 @@ class EmployeeTest {
     }
     EmployeeAlreadyExists employeeNotExists() {
         return passportId -> false;
-    }
-
-    EmployeePassportId passportId() {
-        return EmployeePassportId.from(1234567890).get();
-    }
-
-    EmployeeName name() {
-        return EmployeeName.from("Some Name").get();
-    }
-
-    EmployeeDepartment department() {
-        return EmployeeDepartment.from("Some Department").get();
-    }
-
-    EmployeePosition position() {
-        return EmployeePosition.from("Some Position").get();
     }
 }

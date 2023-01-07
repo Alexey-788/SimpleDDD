@@ -12,12 +12,12 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class EmployeePassportId {
 
-    private final static int PASSPORT_ID_LENGTH = 10;
+    public final static int LENGTH = 10;
 
     private final long value;
 
     public static Either<Error, EmployeePassportId> from(long passportId) {
-        if (String.valueOf(passportId).length() != PASSPORT_ID_LENGTH) {
+        if (String.valueOf(passportId).length() != LENGTH) {
             return Either.left(Error.INVALID_LENGTH);
         }
 
